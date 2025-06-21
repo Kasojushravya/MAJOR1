@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Predict by Test Values</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Predict Chronic Disease by Test Values</h2>
+    <form method="post" onsubmit="return validateForm()">
+      <label for="disease">Select Disease:</label>
+      <select id="disease" name="disease" onchange="updateFields()">
+        <option value="diabetes">Diabetes</option>
+        <option value="heart">Heart Disease</option>
+        <option value="kidney">Kidney Disease</option>
+        <option value="cancer">Cancer</option>
+        <option value="mental">Mental Health</option>
+        <option value="copd">COPD</option>
+        <option value="orthopedic">Orthopedic</option>
+        <option value="gastro">Gastrointestinal</option>
+        <option value="autoimmune">Autoimmune</option>
+      </select>
+
+      <div id="test-values"></div>
+
+      <button type="submit">Predict</button>
+    </form>
+  </div>
+
+  <script>
+    const features = {
+      diabetes: [["Fasting Blood Glucose (mg/dL)", "95"],["Postprandial Blood Sugar (mg/dL)", "140"],["HbA1c (%)", "5.8"],["BMI (kg/m²)", "24.5"],["Age", "45"],["Blood Pressure (mmHg)", "120/80"],["Insulin Level (μU/mL)", "16.5"],["Skin Thickness (mm)", "20"]],
+      heart: [["Resting Blood Pressure (mmHg)", "130"],["Cholesterol (mg/dL)", "200"],["Fasting Blood Sugar (>120 mg/dL)", "yesno"],["Maximum Heart Rate Achieved", "170"],["ST Depression (Oldpeak)", "1.5"],["Chest Pain Type (categorical)", "typical angina/atypical/non-anginal/asymptomatic"],["Exercise-induced Angina (Yes/No)", "yesno"],["Age", "60"],["Gender", "male/female"]],
+      kidney: [["Serum Creatinine (mg/dL)", "1.2"],["Blood Urea (mg/dL)", "40"],["Albumin (g/dL)", "4.0"],["Hemoglobin (g/dL)", "13.5"],["Sodium (mEq/L)", "140"],["Potassium (mEq/L)", "4.5"],["Red Blood Cell Count", "4.5"],["Urine Specific Gravity", "1.015"],["Hypertension Status", "yesno"],["Diabetes Status", "yesno"]],
+      cancer: [["Tumor Size (mm or cm)", "25"],["Clump Thickness", "3"],["Cell Size Uniformity", "2"],["Cell Shape Uniformity", "2"],["Nuclear Size", "6"],["Mitoses Count", "1"],["Biopsy Results (Malignant/Benign)", "malignant/benign"]],
+      mental: [["Age", "30"],["Gender", "male/female"],["Work Interference (Yes/No)", "yesno"],["Treatment History (Yes/No)", "yesno"],["Family History of Mental Illness", "yesno"],["Workplace Support", "yesno"],["Stress Level (Scale)", "6"]],
+      copd: [["FEV1 (L)", "2.0"],["FVC (L)", "3.0"],["FEV1/FVC Ratio", "66"],["Smoking Status (Yes/No)", "yesno"],["Age", "55"],["Dyspnea Score (MRC Scale)", "3"]],
+      orthopedic: [["Pelvic Tilt (Degrees)", "15"],["Lumbar Lordosis Angle", "45"],["Sacral Slope", "35"],["Pelvic Radius", "115"],["Degree of Spondylolisthesis", "20"]],
+      gastro: [["pH Monitoring Test Results", "4.5"],["Endoscopy Observations", "inflammation"],["Symptoms Frequency", "5/week"],["BMI", "26.5"],["Smoking Intake", "yesno"],["Alcohol Intake", "yesno"],["H. pylori Infection Status", "positive/negative"]],
+      autoimmune: [["ANA (Antinuclear Antibody Test)", "positive/negative"],["CRP (C-Reactive Protein)", "5.2"],["ESR (Sedimentation Rate)", "20"],["Rheumatoid Factor", "15"],["WBC Count", "7000"],["Joint Pain Level", "moderate"],["TSH (Thyroid Test)", "2.5"]]
+    };
+
+    function updateFields() {
+      const disease = document.getElementById("disease").value;
+      const fields = features[disease] || [];
+      const container = document.getElementById("test-values");
+      container.innerHTML = fields.map(([label, hint]) => {
+        if (hint.toLowerCase() === "yesno") {
+          return `<label>${label}</label><select name="${label}" required><option value="">--Select--</option><option value="Yes">Yes</option><option value="No">No</option></select>`;
+        } else if (hint.includes("/")) {
+          return `<label>${label}</label><select name="${label}" required>` + hint.split("/").map(v => `<option value='${v}'>${v}</option>`).join('') + `</select>`;
+        } else {
+          return `<label>${label}</label><input type="text" name="${label}" value="${hint}" required>`;
+        }
+      }).join('');
+    }
+
+    function validateForm() {
+      const inputs = document.querySelectorAll('#test-values input, #test-values select');
+      for (let input of inputs) {
+        if (!input.value.trim()) {
+          alert('Please fill in all required fields.');
+          input.focus();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    document.addEventListener("DOMContentLoaded", updateFields);
+  </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Predict by Symptoms</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <!-- Tom Select CSS -->
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+
+</head>
+<!-- Tom Select JS -->
+<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+<script>
+  new TomSelect("#symptoms", {
+    plugins: ['remove_button'],
+    persist: false,
+    create: false,
+    maxItems: null
+  });
+</script>
+
+<body>
+  <div class="container symptom-form">
+  <h2>Select Your Symptoms</h2>
+  <form method="post">
+  <label for="symptoms">Select Symptoms:</label>
+  <select id="symptoms" name="symptom" multiple size="20" required style="height: auto;"
+    <option value="chronic cough">🌫️ Chronic Cough</option>
+    <option value="shortness of breath">💨 Shortness of Breath</option>
+    <option value="wheezing">😮‍💨 Wheezing</option>
+    <option value="chest tightness">🫁 Chest Tightness</option>
+    <option value="frequent respiratory infections">🤧 Frequent Respiratory Infections</option>
+
+    <!-- Cardiovascular -->
+    <option value="chest pain">❤️ Chest Pain</option>
+    <option value="palpitations">💓 Palpitations</option>
+    <option value="swelling in legs or feet">🦵 Swelling in Legs or Feet</option>
+    <option value="dizziness">🌀 Dizziness</option>
+    <option value="fainting">😵 Fainting</option>
+
+    <!-- Diabetic -->
+    <option value="increased thirst">🥤 Increased Thirst</option>
+    <option value="frequent urination">🚻 Frequent Urination</option>
+    <option value="unexplained weight loss">⚖️ Unexplained Weight Loss</option>
+    <option value="blurred vision">👓 Blurred Vision</option>
+    <option value="slow healing wounds">🩹 Slow Healing Wounds</option>
+    <option value="numbness or tingling in hands or feet">🖐️ Numbness or Tingling</option>
+
+    <!-- Liver/Kidney -->
+    <option value="swelling in ankles or around eyes">👁️ Swelling Around Eyes</option>
+    <option value="decreased appetite">🥄 Decreased Appetite</option>
+    <option value="nausea">🤢 Nausea</option>
+    <option value="itchy skin">🪶 Itchy Skin</option>
+    <option value="muscle cramps">💢 Muscle Cramps</option>
+    <option value="jaundice">💛 Jaundice</option>
+    <option value="abdominal swelling">🫃 Abdominal Swelling</option>
+    <option value="easy bruising">🟣 Easy Bruising</option>
+
+    <!-- Neurological -->
+    <option value="tremors">🤲 Tremors</option>
+    <option value="difficulty walking">🚶 Difficulty Walking</option>
+    <option value="difficulty speaking or swallowing">🗣️ Difficulty Speaking/Swallowing</option>
+    <option value="cognitive changes">🧠 Cognitive Changes</option>
+
+    <!-- Cancer -->
+    <option value="pain">😖 Pain</option>
+    <option value="lumps or skin changes">🟤 Lumps or Skin Changes</option>
+    <option value="persistent cough">🤒 Persistent Cough</option>
+    <option value="changes in bowel or bladder habits">🚽 Bowel/Bladder Habit Changes</option>
+    <option value="unusual bleeding">🩸 Unusual Bleeding</option>
+
+    <!-- Autoimmune -->
+    <option value="joint pain">🦴 Joint Pain</option>
+    <option value="swelling">💧 Swelling</option>
+    <option value="fever">🌡️ Fever</option>
+    <option value="skin rashes">🌺 Skin Rashes</option>
+    <option value="muscle aches">🧍 Muscle Aches</option>
+    <option value="dry eyes or mouth">😶‍🌫️ Dry Eyes or Mouth</option>
+    <option value="hair loss">🧑‍🦲 Hair Loss</option>
+
+    <!-- GI Symptoms -->
+    <option value="abdominal pain">🥴 Abdominal Pain</option>
+    <option value="cramping">🤕 Cramping</option>
+    <option value="bloating">🎈 Bloating</option>
+    <option value="diarrhea">🚽 Diarrhea</option>
+    <option value="constipation">⛔ Constipation</option>
+    <option value="heartburn">🔥 Heartburn</option>
+    <option value="weight loss">📉 Weight Loss</option>
+
+    <!-- Mental -->
+    <option value="persistent sadness">😢 Persistent Sadness</option>
+    <option value="low mood">☁️ Low Mood</option>
+    <option value="loss of interest">😶 Loss of Interest</option>
+    <option value="difficulty concentrating">🎯 Difficulty Concentrating</option>
+    <option value="sleep disturbances">🛌 Sleep Disturbances</option>
+    <option value="irritability">😤 Irritability</option>
+    <option value="physical symptoms">🧍 Physical Symptoms</option>
+  </select>
+  <p style="margin-top: 10px; font-size: 14px; color: #555;">Hold <strong>Ctrl</strong> (or <strong>Cmd ⌘</strong> on Mac) to select multiple symptoms.</p>
+  <button type="submit">🔎 Predict</button>
+</form>
+</div>
+
+</body>
+</html>

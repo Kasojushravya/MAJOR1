@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prediction Results</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Chronic Disease Prediction</h2>
+
+    <div class="notice">
+      This tool provides an estimate based on the information you provide and is not a medical diagnosis. Always consult with healthcare professionals for proper evaluation.
+    </div>
+
+   <div class="results">
+  {% for disease in all_diseases %}
+    <div class="card {{ disease.level | lower }}">
+      <h3>{{ disease.name }} Risk</h3>
+      <div class="score">{{ disease.percentage }}%</div>
+      <p><strong>Risk Level:</strong> {{ disease.level }}</p>
+      <p><strong>Key Risk Factors:</strong><br>{{ disease.factors }}</p>
+    </div>
+  {% endfor %}
+</div>
+
+
+    <div class="recommendations">
+      <h4>📄 Recommendations</h4>
+      <p>
+        Based on your risk assessment, we recommend the following actions:
+        <ul>
+          <li>Consult with a specialist for targeted medical evaluation.</li>
+          <li>Schedule necessary diagnostic tests based on symptoms and risk areas.</li>
+          <li>Follow a healthy diet and regular exercise regimen.</li>
+          <li>Keep regular checkups with your healthcare provider.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="buttons">
+      <a href="/" class="btn green">Start New Assessment</a>
+      <a href="/symptoms" class="btn green">Get Medical Assistance</a>
+      <a href="/test-values" class="btn blue">Find Doctors</a>
+    </div>
+  </div>
+</body>
+</html>
